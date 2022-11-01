@@ -1,4 +1,4 @@
-import "./index.css";
+import "./scss/style.css";
 
 //components
 import Header from "./components/Header";
@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <Header />
 
       <Footer />
