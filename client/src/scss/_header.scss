@@ -1,0 +1,51 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    min-height: 150px;
+    background: rgb(226, 222, 222);
+    justify-content: space-between;
+    align-items: center;
+
+    @media(min-width: 1000px) {
+        min-height: 60px;
+    }
+
+    span {
+        font-size: 48px;
+        margin-left: 50px;
+
+        @media(min-width: 1000px) {
+            font-size: 24px;
+            letter-spacing: 3px;
+        }
+    }
+
+    button {
+        font-size: 48px;
+        line-height: 48px;
+        height: 100px;
+        width: 250px;
+        margin-right: 50px;
+        display: block;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        outline: none;
+        cursor: pointer;
+        background-color: #00a8ff;        
+
+        @media(min-width: 1000px) {
+            font-size: 16px;
+            line-height: 16px;
+            max-height: 26px;
+            width: 100px;
+
+        }
+
+        &:hover {
+            background-color:firebrick;
+        }
+
+
+    }
+}
