@@ -1,0 +1,55 @@
+.panel-expense {
+    background-color: transparent;
+    display: flex;
+    min-height: 150px;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 25px 0;
+
+    @media(min-width: 1000px) {
+        min-height: 30px;
+    }
+
+    button {
+        font-size: 32px;
+        line-height: 48px;
+        height: 100px;
+        width: 250px;
+        margin-right: 50px;
+        display: block;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        outline: none;
+        cursor: pointer;
+        background-color:firebrick; 
+
+        @media(min-width: 1000px) {
+            font-size: 16px;
+            line-height: 16px;
+            max-height: 26px;
+            width: 150px;
+            margin: 0;
+
+        }
+
+        &:hover {
+            background-color:darkred;
+        }
+    }
+
+    label {
+        font-size: 48px;
+        margin-left: 50px;
+        font-weight: bolder;
+
+        @media(min-width: 1000px) {
+            font-size: 24px;
+            letter-spacing: 3px;
+        }
+    }
+
+
+    
+}

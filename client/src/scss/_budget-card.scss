@@ -1,0 +1,66 @@
+.budget-card {
+    margin: 0 20px 50px;
+    background: rgb(247, 235, 235);
+    border-radius: 6px;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    .budget-card-amount {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 15px;
+        align-items: center;
+
+        h2 {
+            font-size: 38px;
+            margin-left: 10px;
+            color: red;
+        }
+
+        span {
+            font-size: 38px;
+            line-height: 38px;
+            margin-right: 10px;
+            
+        }
+    }
+
+    .budget-card-button {
+        display: flex;
+        justify-content: space-around;
+
+        button {
+        font-size: 24px;
+        line-height: 24px;
+        height:70px;
+        width: 250px;
+        display: block;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        outline: none;
+        cursor: pointer;
+        background-color:firebrick; 
+
+        &.remove-card {
+            background-color:rgb(0, 0, 0); 
+        }
+
+        &.list {
+            background-color:rgb(166, 34, 178); 
+        }
+
+        &.add {
+            background-color:firebrick; 
+        }
+
+        &:hover {
+            background-color: darkred;
+        }
+        }
+
+        
+    }
+}
