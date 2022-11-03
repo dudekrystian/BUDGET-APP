@@ -64,4 +64,121 @@ code {
 }
 .header button:hover {
   background-color: firebrick;
+}
+
+.budget-card {
+  margin: 0 20px 50px;
+  background: rgb(247, 235, 235);
+  border-radius: 6px;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.budget-card .budget-card-amount {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 15px;
+  align-items: center;
+}
+.budget-card .budget-card-amount h2 {
+  font-size: 38px;
+  margin-left: 10px;
+  color: red;
+}
+.budget-card .budget-card-amount span {
+  font-size: 38px;
+  line-height: 38px;
+  margin-right: 10px;
+}
+.budget-card .budget-card-button {
+  display: flex;
+  justify-content: space-around;
+}
+.budget-card .budget-card-button button {
+  font-size: 24px;
+  line-height: 24px;
+  height: 70px;
+  width: 250px;
+  display: block;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+  background-color: firebrick;
+}
+.budget-card .budget-card-button button.remove-card {
+  background-color: rgb(0, 0, 0);
+}
+.budget-card .budget-card-button button.list {
+  background-color: rgb(166, 34, 178);
+}
+.budget-card .budget-card-button button.add {
+  background-color: firebrick;
+}
+.budget-card .budget-card-button button:hover {
+  background-color: darkred;
+}
+
+.panel-expense {
+  background-color: transparent;
+  display: flex;
+  min-height: 150px;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin: 25px 0;
+}
+@media (min-width: 1000px) {
+  .panel-expense {
+    min-height: 30px;
+  }
+}
+.panel-expense button {
+  font-size: 32px;
+  line-height: 48px;
+  height: 100px;
+  width: 250px;
+  margin-right: 50px;
+  display: block;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+  background-color: firebrick;
+}
+@media (min-width: 1000px) {
+  .panel-expense button {
+    font-size: 16px;
+    line-height: 16px;
+    max-height: 26px;
+    width: 150px;
+    margin: 0;
+  }
+}
+.panel-expense button:hover {
+  background-color: darkred;
+}
+.panel-expense label {
+  font-size: 48px;
+  margin-left: 50px;
+  font-weight: bolder;
+}
+@media (min-width: 1000px) {
+  .panel-expense label {
+    font-size: 24px;
+    letter-spacing: 3px;
+  }
+}
+
+.progress-bar {
+  background-color: grey;
+  border-radius: 25px;
+  width: 98%;
+  height: 24px;
+  text-align: center;
+  margin-left: 1%;
+  margin-right: 1%;
 }/*# sourceMappingURL=style.css.map */
