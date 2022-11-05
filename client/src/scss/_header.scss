@@ -43,7 +43,9 @@
         }
 
         &:hover {
-            background-color:firebrick;
+            opacity: 0.8;
+            transition: .2s linear;
+
         }
 
 

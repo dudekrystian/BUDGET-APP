@@ -35,7 +35,9 @@
         }
 
         &:hover {
-            background-color:darkred;
+            opacity: 0.8;
+            transition: .2s linear;
+
         }
     }
 
