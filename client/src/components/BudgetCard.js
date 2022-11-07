@@ -1,6 +1,7 @@
 import React from "react";
 import ProgressBar from "./ProgressBar";
 import { currencyFormatter } from "../utils/utils";
+import AddExpenseModal from "./AddExpenseModal";
 
 export default function BudgetCard({ name, amount, max }) {
   return (
@@ -18,6 +19,7 @@ export default function BudgetCard({ name, amount, max }) {
 
       <div className="budget-card-button">
         <button className="add">Add Expense</button>
+        <AddExpenseModal />
         <button className="list">List Expense</button>
         <button className="remove-card">Remove All</button>
       </div>
