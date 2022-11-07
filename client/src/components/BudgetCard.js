@@ -28,8 +28,6 @@ export default function BudgetCard({ name, amount, max }) {
 function getProgressBarColor(amount, max) {
   const ratio = (amount / max) * 100;
 
-  console.log(ratio);
-
   if (ratio <= 50) {
     return "blue";
   }

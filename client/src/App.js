@@ -4,17 +4,32 @@ import "./scss/style.css";
 import Header from "./components/Header";
 import Panel from "./components/Panel-Expense";
 import BudgetCard from "./components/BudgetCard";
+import useBudgets from "./contexts/budgetsContext";
 
 function App() {
+  const { budgets, getBudgetExpenses } = useBudgets();
   return (
-    <div className="app">
-      <Header />
-      <Panel total={11000} />
-      <BudgetCard name="Food" amount={150} max={1000} />
-      <BudgetCard name="Entertaiment" amount={51} max={100} />
-      <BudgetCard name="Sport" amount={79} max={100} />
-      <BudgetCard name="Travel" amount={99} max={100} />
-    </div>
+    <>
+      <div className="app">
+        <Header />
+        <Panel total={0} />
+
+        {budgets.map((budget) => {
+          const amount = getBudgetExpenses(budget.id).reduce(
+            (total, expense) => total + expense.amount,
+            0
+          );
+          return (
+            <BudgetCard
+              key={budget.id}
+              name={budget.name}
+              amount={amount}
+              max={budget.max}
+            />
+          );
+        })}
+      </div>
+    </>
   );
 }
 
