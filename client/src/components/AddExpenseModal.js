@@ -36,7 +36,7 @@ export default function AddExpenseModal({
             <Form.Label>Name</Form.Label>
             <Form.Control ref={descriptionRef} type="text" required />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="max">
+          <Form.Group className="mb-3" controlId="amount">
             <Form.Label> Amount</Form.Label>
             <Form.Control
               ref={amountRef}
@@ -45,6 +45,16 @@ export default function AddExpenseModal({
               min={0}
               step={0.01}
             />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="budgetId">
+            <Form.Label> Category </Form.Label>
+            <Form.Select defaultValue={defaultBudgetId} ref={budgetIdRef}>
+              {budgets.map((budget) => (
+                <option key={budget.id} value={budget.id}>
+                  {budget.name}
+                </option>
+              ))}
+            </Form.Select>
           </Form.Group>
           <div className="d-flex justify-content-end">
             <Button variant="primary" type="submit">
