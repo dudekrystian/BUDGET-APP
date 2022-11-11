@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import ProgressBar from "./ProgressBar";
 import { currencyFormatter } from "../utils/utils";
 import AddExpenseModal from "./AddExpenseModal";
 
 export default function BudgetCard({ name, amount, max }) {
+  const [showAddBudgetsModal, setShowAddBudgetsModal] = useState(false);
+  function handleExpense(e) {
+    e.preventDefault();
+    setShowAddBudgetsModal(true);
+  }
+
   return (
     <div className="budget-card">
       <div className="budget-card-amount">
@@ -18,8 +24,13 @@ export default function BudgetCard({ name, amount, max }) {
       />
 
       <div className="budget-card-button">
-        <button className="add">Add Expense</button>
-        <AddExpenseModal />
+        <button className="add" onClick={handleExpense}>
+          Add Expense
+        </button>
+        <AddExpenseModal
+          show={showAddBudgetsModal}
+          handleClose={() => setShowAddBudgetsModal(false)}
+        />
         <button className="list">List Expense</button>
         <button className="remove-card">Remove All</button>
       </div>
