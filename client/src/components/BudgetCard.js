@@ -2,12 +2,28 @@ import React, { useState } from "react";
 import ProgressBar from "./ProgressBar";
 import { currencyFormatter } from "../utils/utils";
 import AddExpenseModal from "./AddExpenseModal";
+import useBudgets from "../contexts/budgetsContext";
+import ViewExpensesModal from "./ViewExpensesModal";
 
-export default function BudgetCard({ name, amount, max }) {
+export default function BudgetCard({ name, amount, max, id }) {
   const [showAddBudgetsModal, setShowAddBudgetsModal] = useState(false);
+  const [showViewExpensesModal, setShowViewExpensesModal] = useState(false);
+  const { deleteBudget } = useBudgets();
+
   function handleExpense(e) {
     e.preventDefault();
     setShowAddBudgetsModal(true);
+    console.log(id);
+  }
+
+  function handleRemoveAll(e) {
+    e.preventDefault();
+    deleteBudget({ id });
+  }
+
+  function handleListExpenses(e) {
+    e.preventDefault();
+    setShowViewExpensesModal(true);
   }
 
   return (
@@ -29,10 +45,21 @@ export default function BudgetCard({ name, amount, max }) {
         </button>
         <AddExpenseModal
           show={showAddBudgetsModal}
+          budgetId={id}
+          name={name}
           handleClose={() => setShowAddBudgetsModal(false)}
         />
-        <button className="list">List Expense</button>
-        <button className="remove-card">Remove All</button>
+        <button className="list" onClick={handleListExpenses}>
+          List Expenses
+        </button>
+        <ViewExpensesModal
+          show={showViewExpensesModal}
+          budgetId={id}
+          handleClose={() => setShowViewExpensesModal(false)}
+        />
+        <button onClick={handleRemoveAll} className="remove-card">
+          Remove All
+        </button>
       </div>
     </div>
   );
