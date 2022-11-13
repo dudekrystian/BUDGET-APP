@@ -1,5 +1,6 @@
 import AddBudgetModal from "./AddBudgetModal";
 import { useState } from "react";
+import Total from "./Total";
 
 export default function Panel({ total }) {
   const [showAddBudgetsModal, setShowAddBudgetsModal] = useState(false);
@@ -12,7 +13,7 @@ export default function Panel({ total }) {
     <>
       <div className="panel-expense">
         <button onClick={handleAddBudget}>Add Budget</button>
-        <label>Total: {total}</label>
+        <Total />
       </div>
       <AddBudgetModal
         show={showAddBudgetsModal}
