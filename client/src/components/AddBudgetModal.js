@@ -49,31 +49,3 @@ export default function AddBudgetModal({ show, handleClose }) {
     </Modal>
   );
 }
-
-// import React, { useState } from "react";
-
-// export default function AddBudgetModal({ display }) {
-//   function handleSubmit(e) {
-//     e.preventDefault();
-//   }
-
-//   const displayModal = {
-//     display: `${display}`,
-//   };
-
-//   return (
-//     <div className="modal" style={displayModal}>
-//       <div className="modal-header">
-//         <h1>New Budget</h1>
-//         <span>X</span>
-//       </div>
-//       <form onSubmit={handleSubmit}>
-//         <label>Name Category:</label>
-//         <input type="text"></input>
-//         <label>Maximum spending:</label>
-//         <input type="number"></input>
-//         <button>Add</button>
-//       </form>
-//     </div>
-//   );
-// }
