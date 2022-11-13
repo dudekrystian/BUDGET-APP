@@ -8,11 +8,12 @@ import useBudgets from "./contexts/budgetsContext";
 
 function App() {
   const { budgets, getBudgetExpenses } = useBudgets();
+
   return (
     <>
       <div className="app">
         <Header />
-        <Panel total={0} />
+        <Panel />
 
         {budgets.map((budget) => {
           const amount = getBudgetExpenses(budget.id).reduce(
@@ -25,6 +26,7 @@ function App() {
               name={budget.name}
               amount={amount}
               max={budget.max}
+              id={budget.id}
             />
           );
         })}
