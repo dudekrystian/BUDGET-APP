@@ -17,7 +17,7 @@ export default function Total() {
   return (
     <>
       <label>
-        Total: {totalAmount} / {totalBudgetsAmount}
+        Total: {totalAmount}/{totalBudgetsAmount} PLN
       </label>
     </>
   );
