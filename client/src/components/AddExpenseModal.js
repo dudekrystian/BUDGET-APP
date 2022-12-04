@@ -9,17 +9,57 @@ export default function AddExpenseModal({ show, handleClose, budgetId, name }) {
 
   const { addExpense, budgets } = useBudgets();
 
-  function handleSubmit(e) {
+  console.log(budgetId);
+
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   console.log(budgetId);
+  //   console.log(name);
+
+  //   addExpense({
+  //     description: descriptionRef.current.value,
+  //     amount: parseFloat(amountRef.current.value),
+  //     budgetId: budgetIdRef.current.value,
+  //   });
+
+  //   handleClose();
+  //   console.log(budgetId);
+  // }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const expense = {
+      description: descriptionRef.current.value,
+      amount: parseFloat(amountRef.current.value),
+      budget_id: budgetId,
+    };
+
+    console.log(expense);
+
+    const response = await fetch("/api/expenses", {
+      method: "POST",
+      body: JSON.stringify(expense),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const json = await response.json();
+    console.log(json);
+
+    if (response.ok) {
+      console.log("dodano");
+    }
 
     addExpense({
       description: descriptionRef.current.value,
       amount: parseFloat(amountRef.current.value),
-      budgetId: budgetIdRef.current.value,
+      budgetId: budgetId,
     });
 
     handleClose();
-  }
+  };
 
   return (
     <Modal size="lg" show={show} onHide={handleClose}>

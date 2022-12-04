@@ -3,12 +3,45 @@ import { useRef } from "react";
 import useBudgets from "../contexts/budgetsContext";
 
 export default function AddBudgetModal({ show, handleClose }) {
+  // const [name, setName] = useState();
+  // const [max, setMax] = useState();
   const nameRef = useRef();
   const maxRef = useRef();
   const { addBudget } = useBudgets();
 
-  function handleSubmit(e) {
+  // function handleSubmit(e) {
+
+  //   e.preventDefault();
+
+  //   addBudget({
+  //     name: nameRef.current.value,
+  //     max: parseFloat(maxRef.current.value),
+  //   });
+
+  //   handleClose();
+  // }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const budget = {
+      name: nameRef.current.value,
+      max: parseFloat(maxRef.current.value),
+    };
+
+    const response = await fetch("/api/budgets", {
+      method: "POST",
+      body: JSON.stringify(budget),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const json = await response.json();
+    console.log(json);
+
+    if (response.ok) {
+    }
 
     addBudget({
       name: nameRef.current.value,
@@ -16,7 +49,7 @@ export default function AddBudgetModal({ show, handleClose }) {
     });
 
     handleClose();
-  }
+  };
 
   return (
     <Modal size="lg" show={show} onHide={handleClose}>
