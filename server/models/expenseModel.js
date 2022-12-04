@@ -14,6 +14,10 @@ const expenseSchema = new Schema(
       type: Number,
       required: true,
     },
+    budget_id: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
