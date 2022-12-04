@@ -13,7 +13,6 @@ export default function BudgetCard({ name, amount, max, id }) {
   function handleExpense(e) {
     e.preventDefault();
     setShowAddBudgetsModal(true);
-    console.log(id);
   }
 
   function handleRemoveAll(e) {
@@ -83,10 +82,18 @@ function getProgressBarColor(amount, max) {
   if (ratio <= 100) {
     return "red";
   }
+
+  if (ratio > 100) {
+    return "darkgrey";
+  }
 }
 
 function getProgressBarColorBarValue(amount, max) {
   const ratio = (amount / max) * 100;
+
+  if (ratio > 100) {
+    return 100;
+  }
 
   return ratio;
 }
