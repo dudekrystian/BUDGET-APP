@@ -16,17 +16,18 @@ function App() {
         <Panel />
 
         {budgets.map((budget) => {
-          const amount = getBudgetExpenses(budget.id).reduce(
+          const amount = getBudgetExpenses(budget._id).reduce(
             (total, expense) => total + expense.amount,
             0
           );
+
           return (
             <BudgetCard
-              key={budget.id}
+              key={budget._id}
               name={budget.name}
               amount={amount}
               max={budget.max}
-              id={budget.id}
+              id={budget._id}
             />
           );
         })}
