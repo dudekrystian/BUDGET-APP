@@ -12,7 +12,6 @@ const app = express();
 //midldleware
 app.use(express.json());
 app.use((res, req, next) => {
-  console.log(req.path, req.method);
   next();
 });
 
