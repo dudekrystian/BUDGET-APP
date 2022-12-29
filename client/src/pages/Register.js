@@ -1,21 +1,24 @@
-import React from "react";
 import { useState } from "react";
+import useRegister from "../hooks/useRegister";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { register, error } = useRegister();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    await register(email, password);
   };
 
   return (
     <div className="login">
-      <div className="login-information" onSubmit={handleSubmit}>
+      <div className="login-information">
         <h1>Create an accountant</h1>
         <p>Control your money!</p>
       </div>
-      <form className="login-form">
+      <form className="login-form" onSubmit={handleSubmit}>
         <h3>Sing Up</h3>
         <input
           type="email"
@@ -30,6 +33,7 @@ export default function Register() {
           placeholder="Password"
         ></input>
         <button type="submit">Register</button>
+        <div className="error">{error}</div>
       </form>
     </div>
   );
