@@ -1,28 +1,19 @@
 import { Form, Modal, Button } from "react-bootstrap";
-import { useRef } from "react";
-import useBudgets from "../contexts/budgetsContext";
+import { useRef, useState } from "react";
+import useBudgets from "../context/budgetsContext";
+import { useAuthContext } from "../hooks/useAuthContext.js";
 
 export default function AddBudgetModal({ show, handleClose }) {
-  // const [name, setName] = useState();
-  // const [max, setMax] = useState();
+  const { user } = useAuthContext();
+  const [disabled, setDisabled] = useState(false);
+
   const nameRef = useRef();
   const maxRef = useRef();
   const { addBudget } = useBudgets();
 
-  // function handleSubmit(e) {
-
-  //   e.preventDefault();
-
-  //   addBudget({
-  //     name: nameRef.current.value,
-  //     max: parseFloat(maxRef.current.value),
-  //   });
-
-  //   handleClose();
-  // }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setDisabled(true);
 
     const budget = {
       name: nameRef.current.value,
@@ -34,21 +25,17 @@ export default function AddBudgetModal({ show, handleClose }) {
       body: JSON.stringify(budget),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
       },
     });
 
     const json = await response.json();
-    console.log(json);
 
     if (response.ok) {
+      addBudget({ json });
+      setDisabled(false);
+      handleClose();
     }
-
-    addBudget({
-      name: nameRef.current.value,
-      max: parseFloat(maxRef.current.value),
-    });
-
-    handleClose();
   };
 
   return (
@@ -73,7 +60,7 @@ export default function AddBudgetModal({ show, handleClose }) {
             />
           </Form.Group>
           <div className="d-flex justify-content-end">
-            <Button variant="primary" type="submit">
+            <Button disabled={disabled} variant="primary" type="submit">
               Add
             </Button>
           </div>
