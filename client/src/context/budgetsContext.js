@@ -50,7 +50,6 @@ export const BudgetsProvider = ({ children }) => {
 
   useEffect(() => {
     fetchBudget();
-
     fetchExpense();
   });
 
