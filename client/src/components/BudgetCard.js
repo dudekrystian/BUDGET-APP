@@ -2,24 +2,117 @@ import React, { useState } from "react";
 import ProgressBar from "./ProgressBar";
 import { currencyFormatter } from "../utils/utils";
 import AddExpenseModal from "./AddExpenseModal";
-import useBudgets from "../contexts/budgetsContext";
+import useBudgets from "../context/budgetsContext";
 import ViewExpensesModal from "./ViewExpensesModal";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export default function BudgetCard({ name, amount, max, id }) {
   const [showAddBudgetsModal, setShowAddBudgetsModal] = useState(false);
   const [showViewExpensesModal, setShowViewExpensesModal] = useState(false);
-  const { deleteBudget } = useBudgets();
+
+  const { deleteBudget, expenses, deleteExpense } = useBudgets();
+  const { user } = useAuthContext();
 
   function handleExpense(e) {
     e.preventDefault();
     setShowAddBudgetsModal(true);
   }
 
-  function handleRemoveAll(e) {
-    e.preventDefault();
-    deleteBudget({ id });
-  }
+  // function handleRemoveAll(e) {
+  //   e.preventDefault();
 
+  //   const deleteAllEppense = async () => {
+  //     const dele = expenses.filter((ex) => ex.budget_id === id);
+  //     const arrayExpenseToRemove = dele.map((del) => del._id);
+
+  //     for (let i = 0; i < arrayExpenseToRemove.length; i++) {
+  //       const response = await fetch(
+  //         "/api/expenses/" + arrayExpenseToRemove[i],
+  //         {
+  //           method: "DELETE",
+  //           headers: {
+  //             Authorization: `Bearer ${user.token}`,
+  //           },
+  //         }
+  //       );
+  //       const json = response.json();
+
+  //       if (response.ok) {
+  //         console.log(`delete ex ${json}`);
+
+  //         deleteExpense({ json });
+  //       }
+  //     }
+  //   };
+
+  //   const handleClick = async () => {
+  //     e.preventDefault();
+  //     deleteAllEppense();
+
+  //     if (!user) {
+  //       return;
+  //     }
+  //     const response = await fetch("/api/budgets/" + id, {
+  //       method: "DELETE",
+  //       headers: {
+  //         Authorization: `Bearer ${user.token}`,
+  //       },
+  //     });
+  //     const json = await response.json();
+
+  //     if (response.ok) {
+  //       console.log(`delete ${json}`);
+  //       deleteBudget({ json });
+  //     }
+  //   };
+
+  //   handleClick();
+  // }
+
+  const deleteAllEppense = async () => {
+    const dele = expenses.filter((ex) => ex.budget_id === id);
+    const arrayExpenseToRemove = dele.map((del) => del._id);
+
+    for (let i = 0; i < arrayExpenseToRemove.length; i++) {
+      const response = await fetch("/api/expenses/" + arrayExpenseToRemove[i], {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      const json = response.json();
+
+      if (response.ok) {
+        console.log(`delete ex ${json}`);
+        deleteExpense({ json });
+      }
+    }
+  };
+
+  const handleClick = async () => {
+    if (!user) {
+      return;
+    }
+    const response = await fetch("/api/budgets/" + id, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+    const json = await response.json();
+
+    if (response.ok) {
+      console.log(`delete ${json}`);
+      deleteBudget({ json });
+    }
+  };
+
+  function handleRemoveAll(e) {
+    handleClick();
+
+    e.preventDefault();
+    deleteAllEppense();
+  }
   function handleListExpenses(e) {
     e.preventDefault();
     setShowViewExpensesModal(true);
@@ -45,6 +138,7 @@ export default function BudgetCard({ name, amount, max, id }) {
         <AddExpenseModal
           show={showAddBudgetsModal}
           budgetId={id}
+          key={id}
           name={name}
           handleClose={() => setShowAddBudgetsModal(false)}
         />
@@ -54,6 +148,7 @@ export default function BudgetCard({ name, amount, max, id }) {
         <ViewExpensesModal
           show={showViewExpensesModal}
           budgetId={id}
+          name={name}
           handleClose={() => setShowViewExpensesModal(false)}
         />
         <button onClick={handleRemoveAll} className="remove-card">
