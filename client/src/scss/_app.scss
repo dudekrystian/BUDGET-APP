@@ -3,7 +3,24 @@
     flex-direction: column;
     background-color: whitesmoke;
     min-height: 100vh;
-    width: 100%;
+    width: 100vw;
+
+    .container-budget-card {
+
+      // background-color: red;
+
+      @media(min-width: 1000px) {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content:center;
+        align-items: center;
+      }
+
+
+    }
+
+    
 
 
   }

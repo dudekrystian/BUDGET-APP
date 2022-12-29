@@ -14,7 +14,16 @@ code {
   flex-direction: column;
   background-color: whitesmoke;
   min-height: 100vh;
-  width: 100%;
+  width: 100vw;
+}
+@media (min-width: 1000px) {
+  .app .container-budget-card {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .header {
@@ -40,6 +49,18 @@ code {
     letter-spacing: 3px;
   }
 }
+.header p {
+  font-size: 28px;
+  margin-left: 50px;
+  color: red;
+  margin: auto;
+}
+@media (min-width: 1000px) {
+  .header p {
+    font-size: 24px;
+    letter-spacing: 1px;
+  }
+}
 .header button {
   font-size: 48px;
   line-height: 48px;
@@ -57,9 +78,11 @@ code {
 @media (min-width: 1000px) {
   .header button {
     font-size: 16px;
-    line-height: 16px;
-    max-height: 26px;
-    width: 100px;
+    line-height: 36px;
+    max-height: 36px;
+    width: 200px;
+    font-size: 24px;
+    line-height: 24px;
   }
 }
 .header button:hover {
@@ -75,6 +98,11 @@ code {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+}
+@media (min-width: 1000px) {
+  .budget-card {
+    width: 47%;
+  }
 }
 .budget-card .budget-card-amount {
   display: flex;
@@ -153,10 +181,10 @@ code {
 }
 @media (min-width: 1000px) {
   .panel-expense button {
-    font-size: 16px;
-    line-height: 16px;
-    max-height: 26px;
-    width: 150px;
+    font-size: 24px;
+    line-height: 24px;
+    max-height: 60px;
+    width: 250px;
     margin: 0;
   }
 }
@@ -187,34 +215,54 @@ code {
 }
 
 body {
-  background-color: rgb(165, 165, 165);
+  background: #F2F2F2;
 }
 
 .login {
   width: 70%;
   height: 70vh;
-  background: rgb(247, 235, 235);
+  background: #F7FEFA;
   margin: auto;
   margin-top: 5%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   border-radius: 5px;
+  opacity: 0.9;
+}
+@media (min-width: 1000px) {
+  .login {
+    flex-direction: row;
+  }
 }
 .login .login-information {
   background-color: rgb(166, 34, 178);
   color: white;
-  width: 45%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 30%;
+}
+@media (min-width: 1000px) {
+  .login .login-information {
+    width: 45%;
+    height: 100%;
+  }
 }
 .login .login-form {
-  width: 55%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  height: 70%;
+}
+@media (min-width: 1000px) {
+  .login .login-form {
+    width: 55%;
+    height: 100%;
+  }
 }
 .login input {
   border-radius: 6px;
@@ -241,4 +289,9 @@ body {
 }
 .login button:hover {
   opacity: 0.8;
+}
+.login .error {
+  color: red;
+  font-size: large;
+  font-weight: bolder;
 }/*# sourceMappingURL=style.css.map */
