@@ -1,5 +1,16 @@
+import { useState } from "react";
+import { useAuthContext } from "./useAuthContext";
+
 export default function useRegister() {
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(null);
+
+  const { dispatch } = useAuthContext();
+
   const register = async (email, password) => {
+    setIsLoading(true);
+    setError(null);
+
     const response = await fetch("/api/user/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -9,12 +20,18 @@ export default function useRegister() {
     const json = await response.json();
 
     if (!response.ok) {
-      //
+      setIsLoading(false);
+
+      setError(json.error);
     }
     if (response.ok) {
+      console.log("dodane user");
       //
+      localStorage.setItem("user", JSON.stringify(json));
+
+      dispatch({ type: "LOGIN", payload: json });
     }
   };
 
-  return { register };
+  return { register, isLoading, error };
 }
