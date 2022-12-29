@@ -5,7 +5,6 @@ const getExpenses = async (req, res) => {
   const expenses = await Expense.find();
 
   return res.status(200).json(expenses);
-  console.log("ok");
 };
 // create simle expense
 const createExpense = async (req, res) => {
@@ -27,10 +26,8 @@ const createExpense = async (req, res) => {
 
   // add doc to db
   try {
-    // const budget_id = req.budget_id;
     const expense = await Expense.create({ description, amount, budget_id });
 
-    // const expense = await Expense.create({ description, amount });
     res.status(200).json(expense);
   } catch (error) {
     res.status(400).json({ error: error.message });
