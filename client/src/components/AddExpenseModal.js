@@ -1,41 +1,24 @@
 import { Form, Modal, Button } from "react-bootstrap";
-import { useRef } from "react";
-import useBudgets from "../contexts/budgetsContext";
+import { useRef, useState } from "react";
+import useBudgets from "../context/budgetsContext";
 
 export default function AddExpenseModal({ show, handleClose, budgetId, name }) {
   const descriptionRef = useRef();
   const amountRef = useRef();
   const budgetIdRef = useRef();
+  const [disabled, setDisabled] = useState(false);
 
-  const { addExpense, budgets } = useBudgets();
-
-  console.log(budgetId);
-
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   console.log(budgetId);
-  //   console.log(name);
-
-  //   addExpense({
-  //     description: descriptionRef.current.value,
-  //     amount: parseFloat(amountRef.current.value),
-  //     budgetId: budgetIdRef.current.value,
-  //   });
-
-  //   handleClose();
-  //   console.log(budgetId);
-  // }
+  const { addExpense } = useBudgets();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setDisabled(true);
 
     const expense = {
       description: descriptionRef.current.value,
       amount: parseFloat(amountRef.current.value),
       budget_id: budgetId,
     };
-
-    console.log(expense);
 
     const response = await fetch("/api/expenses", {
       method: "POST",
@@ -46,19 +29,12 @@ export default function AddExpenseModal({ show, handleClose, budgetId, name }) {
     });
 
     const json = await response.json();
-    console.log(json);
 
     if (response.ok) {
-      console.log("dodano");
+      handleClose();
+      setDisabled(false);
+      addExpense({ json });
     }
-
-    addExpense({
-      description: descriptionRef.current.value,
-      amount: parseFloat(amountRef.current.value),
-      budgetId: budgetId,
-    });
-
-    handleClose();
   };
 
   return (
@@ -69,7 +45,7 @@ export default function AddExpenseModal({ show, handleClose, budgetId, name }) {
         </Modal.Header>
         <Modal.Body>
           <Form.Group className="mb-3" controlId="description">
-            <Form.Label>Name</Form.Label>
+            <Form.Label>Description</Form.Label>
             <Form.Control ref={descriptionRef} type="text" required />
           </Form.Group>
           <Form.Group className="mb-3" controlId="amount">
@@ -84,16 +60,17 @@ export default function AddExpenseModal({ show, handleClose, budgetId, name }) {
           </Form.Group>
           <Form.Group className="mb-3" controlId="budgetId">
             <Form.Label> Category </Form.Label>
-            <Form.Select defaultValue={budgetId} ref={budgetIdRef}>
-              {budgets.map((budget) => (
-                <option key={budget.id} value={budget.id}>
-                  {budget.name}
-                </option>
-              ))}
-            </Form.Select>
+            <Form.Control
+              key={budgetId}
+              ref={budgetIdRef}
+              type="text"
+              required
+              value={name}
+              disabled="disabled"
+            />
           </Form.Group>
           <div className="d-flex justify-content-end">
-            <Button variant="primary" type="submit">
+            <Button disabled={disabled} variant="primary" type="submit">
               Add
             </Button>
           </div>
