@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 // schema model in the db
-
 const Schema = mongoose.Schema;
 
 const budgetSchema = new Schema(
@@ -12,6 +11,10 @@ const budgetSchema = new Schema(
 
     max: {
       type: Number,
+      required: true,
+    },
+    user_id: {
+      type: String,
       required: true,
     },
   },
