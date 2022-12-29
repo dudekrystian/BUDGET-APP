@@ -1,37 +1,32 @@
-import "./scss/style.css";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useAuthContext } from "./hooks/useAuthContext";
 
-//components
-import Header from "./components/Header";
-import Panel from "./components/Panel-Expense";
-import BudgetCard from "./components/BudgetCard";
-import useBudgets from "./contexts/budgetsContext";
+// pages & components
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
-  const { budgets, getBudgetExpenses } = useBudgets();
+  const { user } = useAuthContext();
 
   return (
     <>
-      <div className="app">
-        <Header />
-        <Panel />
-
-        {budgets.map((budget) => {
-          const amount = getBudgetExpenses(budget._id).reduce(
-            (total, expense) => total + expense.amount,
-            0
-          );
-
-          return (
-            <BudgetCard
-              key={budget._id}
-              name={budget.name}
-              amount={amount}
-              max={budget.max}
-              id={budget._id}
-            />
-          );
-        })}
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={user ? <Home /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/login"
+            element={!user ? <Login /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/register"
+            element={!user ? <Register /> : <Navigate to="/" />}
+          />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
