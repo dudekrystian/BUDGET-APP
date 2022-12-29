@@ -6,8 +6,12 @@ const {
   createBudget,
 } = require("../controllers/budgetController.js");
 
+const requireAuth = require("../middleware/requireAuth");
+
 // create router
 const router = express.Router();
+
+router.use(requireAuth);
 
 // GET all budgets category
 router.get("/", getBudgets);
