@@ -1,4 +1,6 @@
 const express = require("express");
+const cors = require("cors");
+const corsOptions = require("./config/corsOptions.js");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const budgetRouter = require("./routes/budgets.js");
@@ -8,6 +10,7 @@ const expenseRouter = require("./routes/expenses.js");
 // express app
 dotenv.config();
 const app = express();
+app.use(cors(corsOptions));
 
 //midldleware
 app.use(express.json());
