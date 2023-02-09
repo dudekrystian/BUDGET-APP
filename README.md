@@ -7,3 +7,8 @@
 - Express.js
 - Node.js
 - MongoDB
+
+
+testing account 
+mail: testowy@testowy.pl
+pass: !Testowy123
